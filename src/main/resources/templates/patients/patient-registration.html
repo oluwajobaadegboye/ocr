@@ -1,0 +1,123 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/masterlayout}"  >
+<head>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/homepage/index.css}" />
+    <title>Register Patient</title>
+</head>
+<body>
+    <th:block layout:fragment="content">
+        <form id="stuRegForm" method="post" action="/ocr/patient/register" th:object="${patient}"  enctype="multipart/form-data">
+            <fieldset>
+                <legend>Register Patient</legend>
+                <input type="hidden" name="id" th:value="${patient.id}" />
+                <div class="form-group">
+                    <label for="firstName" th:text="#{form.firstName}"></label>
+                    <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"
+                          class="alert alert-danger"></span>
+                    <input id="firstName" name="firstName" type="text" class="form-control" th:value="${patient.firstName}">
+                </div>
+                <div class="form-group">
+                    <label for="lastName" th:text="#{form.lastName}"></label>
+                    <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"
+                          class="alert alert-danger"></span>
+                    <input id="lastName" name="lastName" type="text" class="form-control" th:value="${patient.lastName}">
+                </div>
+                <div class="form-group">
+                    <label for="emailAddress" th:text="#{form.emailAddress}"></label>
+                    <span th:if="${#fields.hasErrors('emailAddress')}" th:errors="*{emailAddress}"
+                          class="alert alert-danger"></span>
+                    <input id="emailAddress" name="emailAddress" type="email" class="form-control" aria-describedby="emailAddressHelp" placeholder="e.g. name@domain.com"
+                           pattern="[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*" title="Email must be in the format, name@domain.tld" th:value="${patient.emailAddress}">
+                    <small id="emailAddressHelp" class="form-text text-muted">Enter a valid email address; in the format as specified.</small>
+                </div>
+
+
+
+                <div class="form-group">
+                    <label for="userName" th:text="#{form.userName}"> </label>
+                    <span th:if="${#fields.hasErrors('credentials.username')}" th:errors="*{credentials.username}"
+                          class="alert alert-danger"></span>
+                    <input id="userName" name="credentials.username" type="text" class="form-control" th:value="${patient.credentials.username}">
+                </div>
+
+                <div class="form-group">
+                    <label for="ssn" th:text="#{form.ssn}"> </label>
+                    <span th:if="${#fields.hasErrors('ssn')}" th:errors="*{lastName}"
+                          class="alert alert-danger"></span>
+                    <input id="ssn" name="ssn" type="text" class="form-control" th:value="${patient.ssn}">
+                </div>
+
+                <div class="form-group">
+                    <label for="password" th:text="#{form.password}"> </label>
+                    <span th:if="${#fields.hasErrors('credentials.password')}" th:errors="*{credentials.password}"
+                          class="alert alert-danger"></span>
+                    <input id="password" name="credentials.password" type="text" class="form-control" th:value="${patient.credentials.password}">
+                </div>
+
+                <div class="form-group">
+                    <label for="verifyPassword" th:text="#{form.verifyPassword}"> </label>
+                    <span th:if="${#fields.hasErrors('credentials.verifyPassword')}" th:errors="*{credentials.verifyPassword}"
+                          class="alert alert-danger"></span>
+                    <input id="verifyPassword" name="credentials.verifyPassword" type="text" class="form-control" th:value="${patient.credentials.verifyPassword}">
+                </div>
+
+                <div class="form-group">
+                    <label for="dob" th:text="#{form.dob}"> </label>
+                    <span th:if="${#fields.hasErrors('dob')}" th:errors="*{dob}"
+                          class="alert alert-danger"></span>
+                    <input id="dob" name="dob" type="text" class="form-control" th:value="${patient.dob}">
+                </div>
+
+                <div class="form-group">
+                    <label for="phone" th:text="#{form.phone}"> </label>
+                    <span th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"
+                          class="alert alert-danger"></span>
+                    <input id="phone" name="phone" type="text" class="form-control" th:value="${patient.phone}">
+                </div>
+
+                <div class="form-group">
+                    <label for="street" th:text="#{form.street}"> </label>
+                    <span th:if="${#fields.hasErrors('address.street')}" th:errors="*{address.street}"
+                          class="alert alert-danger"></span>
+                    <input id="street" name="address.street" type="text" class="form-control" th:value="${patient.address.street}">
+                </div>
+
+                <div class="form-group">
+                    <label for="city" th:text="#{form.city}"> </label>
+                    <span th:if="${#fields.hasErrors('address.city')}" th:errors="*{address.city}"
+                          class="alert alert-danger"></span>
+                    <input id="city" name="address.city" type="text" class="form-control" th:value="${patient.address.city}">
+                </div>
+
+                <div class="form-group">
+                    <label for="state" th:text="#{form.state}"> </label>
+                    <span th:if="${#fields.hasErrors('address.state')}" th:errors="*{address.state}"
+                          class="alert alert-danger"></span>
+                    <input id="state" name="address.state" type="text" class="form-control" th:value="${patient.address.state}">
+                </div>
+
+                <div class="form-group">
+                    <label for="zip" th:text="#{form.zip}"> </label>
+                    <span th:if="${#fields.hasErrors('address.zip')}" th:errors="*{address.zip}"
+                          class="alert alert-danger"></span>
+                    <input id="zip" name="address.zip" type="text" class="form-control" th:value="${patient.address.zip}">
+                </div>
+
+
+                <div style="float:right;">
+                    <a href="/ocr/patient" class="btn btn-outline-warning">Cancel</a>&nbsp;&nbsp;&nbsp;
+                    <button id="btnSubmit" type="submit" class="btn btn-outline-success">Register Patient</button>
+                </div>
+            </fieldset>
+        </form>
+
+
+    </th:block>
+
+    <th:block layout:fragment="footer"></th:block>
+    
+</body>
+</html>
