@@ -11,7 +11,7 @@
 
 <body>
     <th:block layout:fragment="content">
-        <form id="appointmentForm" th:action="/ocr/appointment/add"  method="GET" action="/ocr/appointment/add">
+        <form id="appointmentForm"  method="GET" action="/ocr/appointment/add">
             <fieldset>
                 <legend th:text="#{form.addNewAppointment}"> </legend>
 
@@ -23,7 +23,8 @@
                             <div class="col-sm-8">
                                 <select name="date" class="form-control" onchange="javascript: $('#appointmentForm').submit()">
                                     <th:forEach items="${dates}" var="d">
-                                        <option value="${d}" th:if test="${d == date}">selected</th:if> >${d}</option>
+
+                                        <option value="${d}">${d}</option>
                                     </th:forEach>
                                 </select>
 
@@ -35,7 +36,7 @@
                                 <select name="categoryId" class="form-control" onchange="javascript: $('#appointmentForm').submit()">
                                     <option value="0"  th:text="#{allDoctors}"></option>
                                     <th:forEach items="${categories}" var="category">
-                                        <option value="${category.id}" th:if test="${category.id == categoryId}">selected</th:if> >${category.categoryName}</option>
+                                        <option value="${category.id}">${category.categoryName}</option>
                                     </th:forEach>
                                 </select>
 
@@ -47,11 +48,8 @@
                                 <!-- doctors -->
                                 <select name="doctorId" class="form-control" onchange="javascript: $('#appointmentForm').submit()">
                                     <th:forEach items="${doctors}" var="doctor">
-                                        <option value="${doctor.id}" th:if test="${doctor.id == doctorId}">selected</:if> > ${doctor.fullName}</option>
+                                        <option value="${doctor.id}"> ${doctor.fullName}</option>
                                     </th:forEach>
-                                    <th:if test = "${doctors.size() == 0}">
-                                        <option value="0">[No doctor available]</option>
-                                    </th:if>
                                 </select>
                             </div>
                         </div>
@@ -68,18 +66,17 @@
                             <div class="col-sm-8">
                                 <th:forEach items="${timespans}" var="timespan">
                                     <div class="radio">
-                                        <label><input th:if test="${!timespan.available}">disabled</th:if> type="radio" name="timespanId" value="${timespan.id}" class="form-check-input"/> ${timespan.value}</label>
+                                        <label><input type="radio" name="timespanId" value="${timespan.id}" class="form-check-input"/> ${timespan.value}</label>
                                     </div>
                                 </th:forEach>
                             </div>
                         </div>
                         <!-- submit -->
                         <div class="form-group">
-                            <div class="col-sm-4">&nbsp;</div>
                             <div class="col-sm-8">
-                                th:text="#{form.appointment.check.submit}" var="checkSubmitText"/>
-                                <input th:if test="${timespans.size() == 0}">disabled</th:if> type="submit" id="btnCheck" class="btn btn-primary"
-                                      name="btnFinalSubmit" value="${checkSubmitText}"  class="form-control"/>
+                                <label th:text="#{form.appointment.check.submit}" var="checkSubmitText"/>
+                                <input  type="submit" id="btnCheck" class="btn btn-primary"
+                                      name="btnFinalSubmit" value="${checkSubmitText}" />
                             </div>
                         </div>
                     </div>
