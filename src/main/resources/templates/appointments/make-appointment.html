@@ -1,0 +1,104 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/masterlayout}"  >
+<head>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/homepage/index.css}" />
+    <title th:text="#{form.addAppointment}"></title>
+</head>
+
+
+<body>
+    <th:block layout:fragment="content">
+        <form id="appointmentForm" th:action="/ocr/appointment/add"  method="GET" action="/ocr/appointment/add">
+            <fieldset>
+                <legend th:text="#{form.addNewAppointment}"> </legend>
+
+                <div class="form-grou p form-group-sm">
+                    <!-- left column -->
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" th:text="#{form.appointment.date}" /></label>
+                            <div class="col-sm-8">
+                                <select name="date" class="form-control" onchange="javascript: $('#appointmentForm').submit()">
+                                    <th:forEach items="${dates}" var="d">
+                                        <option value="${d}" <th:if test="${d == date}">selected</th:if> >${d}</option>
+                                    </th:forEach>
+                                </select>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" th:text="#{form.appointment.doctorCategory}" /></label>
+                            <div class="col-sm-8">
+                                <select name="categoryId" class="form-control" onchange="javascript: $('#appointmentForm').submit()">
+                                    <option value="0"><spring:message code='allDoctors'/></option>
+                                    <c:forEach items="${categories}" var="category">
+                                        <option value="${category.id}" <c:if test="${category.id == categoryId}">selected</c:if> >${category.categoryName}</option>
+                                    </c:forEach>
+                                </select>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="doctor"><spring:message
+                                    code="form.appointment.doctor" /></label>
+                            <div class="col-sm-8">
+                                <!-- doctors -->
+                                <select name="doctorId" class="form-control" onchange="javascript: $('#appointmentForm').submit()">
+                                    <c:forEach items="${doctors}" var="doctor">
+                                        <option value="${doctor.id}" <c:if test="${doctor.id == doctorId}">selected</c:if> > ${doctor.fullName}</option>
+                                    </c:forEach>
+                                    <c:if test = "${doctors.size() == 0}">
+                                        <option value="0">[No doctor available]</option>
+                                    </c:if>
+                                </select>
+                            </div>
+                        </div>
+
+                        <%-- <div class="form-group">
+                        <label for="date" class="col-sm-4 control-label"><spring:message
+                                code="form.appointment.date" /></label>
+                        <div class="col-sm-8">
+                            <input id="date" name="date" value="${date}" class="form-control" />
+                        </div>
+                    </div> --%>
+                        <!-- timespans -->
+                        <div class="form-group">
+                            <label for="date" class="col-sm-4 control-label"><spring:message
+                                    code="time" /></label>
+                            <div class="col-sm-8">
+                                <c:forEach items="${timespans}" var="timespan">
+                                    <div class="radio">
+                                        <label><input <c:if test="${!timespan.available}">disabled</c:if> type="radio" name="timespanId" value="${timespan.id}" class="form-check-input"/> ${timespan.value}</label>
+                                    </div>
+                                </c:forEach>
+                            </div>
+                        </div>
+                        <!-- submit -->
+                        <div class="form-group">
+                            <div class="col-sm-4">&nbsp;</div>
+                            <div class="col-sm-8">
+                                <spring:message code="form.appointment.check.submit" var="checkSubmitText"/>
+                                <input <c:if test="${timespans.size() == 0}">disabled</c:if> type="submit" id="btnCheck" class="btn btn-primary" name="btnFinalSubmit" value="${checkSubmitText}"  class="form-control"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div style="float:right;">
+                    <a href="/ocr/patient" class="btn btn-outline-warning">Cancel</a>&nbsp;&nbsp;&nbsp;
+                    <button id="btnSubmit" type="submit" class="btn btn-outline-success">Register Patient</button>
+                </div>
+            </fieldset>
+        </form>
+
+
+    </th:block>
+
+    <th:block layout:fragment="footer"></th:block>
+    
+</body>
+</html>
