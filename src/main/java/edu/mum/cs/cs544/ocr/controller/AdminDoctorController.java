@@ -26,10 +26,7 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * 
- * @author Cong Khanh Tran - trancongkhanh@gmail.com
- *
- *
+ * @author Oluwajoba Adegboye
  */
 @Controller
 @RequestMapping("/admin/doctors")

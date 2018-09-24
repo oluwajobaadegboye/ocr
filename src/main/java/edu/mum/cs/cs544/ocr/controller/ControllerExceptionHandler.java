@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import java.util.List;
 
 /**
- * Handler error for application
- * @author Cong Khanh Tran - trancongkhanh@gmail.com
+ * Handle error for application
+ * @author Oluwajoba Adegboye
  *
  *
  */
