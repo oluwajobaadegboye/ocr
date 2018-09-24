@@ -13,10 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.validation.Valid;
 
 /**
- * 
- * @author Cong Khanh Tran - trancongkhanh@gmail.com
- *
- *
+ * @author Oluwajoba Adegboye
  */
 @Controller
 @RequestMapping("/admin/category")

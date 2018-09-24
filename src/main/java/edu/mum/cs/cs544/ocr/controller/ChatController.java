@@ -9,10 +9,7 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 
 /**
- * 
- * @author Cong Khanh Tran - trancongkhanh@gmail.com
- *
- *
+ * @author Oluwajoba Adegboye
  */
 @Controller
 public class ChatController {
